@@ -4,3 +4,6 @@ drizzle/
 .vscode/
 logs/
 .gitignore
+.git
+.DS_Store
+.idea/

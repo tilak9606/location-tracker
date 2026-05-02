@@ -10,6 +10,13 @@ A full-stack real-time application where authenticated users can:
 - **Share live location** via browser geolocation API
 - **See other users** moving on an interactive Leaflet map
 
+---
+
+## Demo Video
+https://youtu.be/vLyhdCwExl8
+
+---
+
 ## System Architecture
 
 ```
@@ -228,10 +235,6 @@ CLIENT_URL=http://localhost:8000
 4. Register 
 5. Allow location permission in both
 6. See both markers moving on each other's maps!
-
----
-
-## Demo Video
 
 
 ---

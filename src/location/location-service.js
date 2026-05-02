@@ -26,6 +26,7 @@ export const getLocationHistory = async (userId, limit = 100) => {
 };
 
 export const updateSession = async (userId, socketId, isOnline = true) => {
+  // Upsert using onConflictDoUpdate
   const existing = await db.select().from(activeSessions)
     .where(eq(activeSessions.socketId, socketId))
     .limit(1);

@@ -8,8 +8,8 @@ import { locationHistory } from './db/schema.js';
 const LOCATION_TOPIC = process.env.KAFKA_TOPIC || 'location-updates';
 
 async function init() {
-  console.log('Starting Database Processor...');
-  
+  console.log('🔄 Starting Database Processor...');
+
   const consumer = kafkaClient.consumer({
     groupId: 'database-processor',
     sessionTimeout: 30000,

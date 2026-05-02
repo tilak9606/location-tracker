@@ -60,7 +60,7 @@ export const authenticateToken = async (req, res, next) => {
 export const authenticateSocket = async (socket, next) => {
   try {
     const token = socket.handshake.auth.token || socket.handshake.query.token;
-    
+
     if (!token) {
       return next(new Error('Authentication required'));
     }

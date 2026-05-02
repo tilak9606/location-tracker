@@ -37,7 +37,7 @@ export const register = async (req, res) => {
     });
 
     const { accessToken, refreshToken } = generateTokens(newUser.id);
-    
+
     await db.update(users)
       .set({ refreshToken })
       .where(eq(users.id, newUser.id));
@@ -80,7 +80,7 @@ export const login = async (req, res) => {
     }
 
     const { accessToken, refreshToken } = generateTokens(user[0].id);
-    
+
     await db.update(users)
       .set({ refreshToken })
       .where(eq(users.id, user[0].id));
@@ -110,7 +110,7 @@ export const refresh = async (req, res) => {
     }
 
     const decoded = verifyRefreshToken(refreshToken);
-    
+
     const user = await db.select({
       id: users.id,
       refreshToken: users.refreshToken,
@@ -121,7 +121,7 @@ export const refresh = async (req, res) => {
     }
 
     const { accessToken, refreshToken: newRefreshToken } = generateTokens(decoded.userId);
-    
+
     await db.update(users)
       .set({ refreshToken: newRefreshToken })
       .where(eq(users.id, decoded.userId));

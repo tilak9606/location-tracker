@@ -5,20 +5,29 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import * as schema from './schema.js';
 
+if (!process.env.DATABASE_URL) {
+  console.error('ERROR: DATABASE_URL is not set in .env file');
+  process.exit(1);
+}
+
+const connectionString = process.env.DATABASE_URL;
+
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false },
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 10000,
+  connectionString,
+  ssl: connectionString.includes('sslmode=require') 
+    ? { rejectUnauthorized: false } 
+    : false,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
 });
 
 pool.on('connect', () => {
-    console.log('New database connection established');
+    
 });
 
 pool.on('error', (err) => {
-    console.error('Unexpected database pool error:', err.message);
+  console.error('Database pool error:', err.message);
 });
 
 export const db = drizzle(pool, { schema });
